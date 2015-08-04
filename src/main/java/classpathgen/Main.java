@@ -78,7 +78,13 @@ public class Main {
 		final StringBuilder classPathStringBuilder = new StringBuilder();
 		final char splitter = isWindows? ';': ':';
 		System.out.println("splitter="+ splitter);
-		classPathStringBuilder.append('\"').append('.').append(splitter).append(basePath.toFile().getAbsolutePath()).append(splitter).append(mainJarFile.getAbsolutePath());
+		
+		//整个操作就是在target目录下了：
+		classPathStringBuilder.append('\"')
+			.append('.').append(splitter)
+			.append(basePath.toFile().getAbsolutePath()).append(splitter)
+			.append(basePath.resolve("classes").toFile().getAbsolutePath()).append(splitter)
+			.append(mainJarFile.getAbsolutePath());
 		for(final File f: dependenceJarFileSet){
 			classPathStringBuilder.append(splitter).append(f.getAbsolutePath());
 		}
